@@ -3,7 +3,7 @@
     $('#buscar').on('click', function () {
 
 
-        $('#alerta').show();
+        $('#alerta').hide();
 
         $.ajax({
             url: "/Home/BuscaAdvogado",
@@ -17,6 +17,8 @@
                 console.log(response);
 
                 var trHTML = '';
+                $('#tabela-advogados').append(trHTML);   
+
                 $.each(response, function (i, item) {
                     trHTML += '<tr><td>' + item.Inscricao + '</td><td>' + item.Nome + '</td><td>' + item.Organizacao + '</td><td>'+ item.Situacao + '</td></tr>';
                 });
