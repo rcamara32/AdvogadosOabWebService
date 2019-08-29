@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ConsultaAdvogadoPorCpf">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cpf" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaAdvogadoPorCpfResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultaAdvogadoPorCpfResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Authentication" type="tns:Authentication" />
+      <s:complexType name="Authentication">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="ConsultaAdvogado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inscricao" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="uf" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nome" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaAdvogadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultaAdvogadoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscaImagemAdvogado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="numeroSeguranca" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscaImagemAdvogadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscaImagemAdvogadoResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ConsultaAdvogadoPorCpfSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultaAdvogadoPorCpf" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaAdvogadoPorCpfSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultaAdvogadoPorCpfResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaAdvogadoPorCpfAuthentication">
+    <wsdl:part name="Authentication" element="tns:Authentication" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaAdvogadoSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultaAdvogado" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaAdvogadoSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultaAdvogadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaAdvogadoAuthentication">
+    <wsdl:part name="Authentication" element="tns:Authentication" />
+  </wsdl:message>
+  <wsdl:message name="BuscaImagemAdvogadoSoapIn">
+    <wsdl:part name="parameters" element="tns:BuscaImagemAdvogado" />
+  </wsdl:message>
+  <wsdl:message name="BuscaImagemAdvogadoSoapOut">
+    <wsdl:part name="parameters" element="tns:BuscaImagemAdvogadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="BuscaImagemAdvogadoAuthentication">
+    <wsdl:part name="Authentication" element="tns:Authentication" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="ConsultaAdvogadoPorCpf">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna os dados do Advogado em formato XML - Parâmetro [cpf: CPF do Advogado]</wsdl:documentation>
+      <wsdl:input message="tns:ConsultaAdvogadoPorCpfSoapIn" />
+      <wsdl:output message="tns:ConsultaAdvogadoPorCpfSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaAdvogado">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna os dados do Advogado em formato XML - Parâmetros [inscricao: Número da Inscrição do Advogado, uf: Unidade Federativa do Advogado, nome: Nome do Advogado]</wsdl:documentation>
+      <wsdl:input message="tns:ConsultaAdvogadoSoapIn" />
+      <wsdl:output message="tns:ConsultaAdvogadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscaImagemAdvogado">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna um array de bytes com a foto do Advogado - Parâmetro [numeroSeguranca: Número de Segurança do Advogado]</wsdl:documentation>
+      <wsdl:input message="tns:BuscaImagemAdvogadoSoapIn" />
+      <wsdl:output message="tns:BuscaImagemAdvogadoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConsultaAdvogadoPorCpf">
+      <soap:operation soapAction="http://tempuri.org/ConsultaAdvogadoPorCpf" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ConsultaAdvogadoPorCpfAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaAdvogado">
+      <soap:operation soapAction="http://tempuri.org/ConsultaAdvogado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ConsultaAdvogadoAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscaImagemAdvogado">
+      <soap:operation soapAction="http://tempuri.org/BuscaImagemAdvogado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:BuscaImagemAdvogadoAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConsultaAdvogadoPorCpf">
+      <soap12:operation soapAction="http://tempuri.org/ConsultaAdvogadoPorCpf" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ConsultaAdvogadoPorCpfAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaAdvogado">
+      <soap12:operation soapAction="http://tempuri.org/ConsultaAdvogado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ConsultaAdvogadoAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscaImagemAdvogado">
+      <soap12:operation soapAction="http://tempuri.org/BuscaImagemAdvogado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:BuscaImagemAdvogadoAuthentication" part="Authentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="https://www5.oab.org.br/cnaws/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="https://www5.oab.org.br/cnaws/service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
